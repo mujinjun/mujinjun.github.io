@@ -1,0 +1,367 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>hexo建站步骤简要 | Do sth.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="mujinjun">
+    
+    <meta name="description" content="看着个人静态博客很流行，加上几年前买的域名再不用就荒废了。于是借github和gitcafe都支持静态内容发布空间的机会，也凑个热闹，正好把别处看到的精彩内容专门放于此处以便日后翻查。
+开博耗费三日，整体由hexo(博客)+github/gitcafe(空间服务器)+qiniu(图库)三部分组成。博">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Do sth." title="Do sth."/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Do sth.">Do sth.</a></h1>
+				<h2 class="blog-motto">do something</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:mujinjun.gitcafe.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/25/hexobuildsite/" title="hexo建站步骤简要" itemprop="url">hexo建站步骤简要</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://mujinjun.gitcafe.com" title="mujinjun">mujinjun</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-10-25T09:45:00.000Z" itemprop="datePublished">10月 25 2014</time>
+    Updated:<time datetime="2014-10-28T13:58:53.000Z" itemprop="dateModified">10月 28 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建步骤："><span class="toc-number">1.</span> <span class="toc-text">搭建步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git"><span class="toc-number">1.1.</span> <span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">1.3.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化博客"><span class="toc-number">1.4.</span> <span class="toc-text">初始化博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装其它插件"><span class="toc-number">1.5.</span> <span class="toc-text">安装其它插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册github和gitcafe帐号"><span class="toc-number">1.6.</span> <span class="toc-text">注册github和gitcafe帐号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定制hexo配置文件_config-yml"><span class="toc-number">1.7.</span> <span class="toc-text">定制hexo配置文件_config.yml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成和推送blog"><span class="toc-number">1.8.</span> <span class="toc-text">生成和推送blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地预览blog"><span class="toc-number">1.9.</span> <span class="toc-text">本地预览blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qiniu图库设置"><span class="toc-number">1.10.</span> <span class="toc-text">qiniu图库设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitcafe域名绑定"><span class="toc-number">1.11.</span> <span class="toc-text">gitcafe域名绑定</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>看着个人静态博客很流行，加上几年前买的域名再不用就荒废了。于是借github和gitcafe都支持静态内容发布空间的机会，也凑个热闹，正好把别处看到的精彩内容专门放于此处以便日后翻查。</p>
+<p>开博耗费三日，整体由hexo(博客)+github/gitcafe(空间服务器)+qiniu(图库)三部分组成。博客内容同时发布到github和gitcafe，github用于备份，gitcafe用于和个人域名绑定正式发布。</p>
+<h1 id="搭建步骤：">搭建步骤：</h1>
+<p>(OS:Debian 7 wheezy 64bit)</p>
+<h2 id="安装git">安装git</h2>
+<p>直接用apt-get命令安装即可</p>
+<h2 id="安装node-js">安装node.js</h2>
+<p>去<a href="http://nodejs.org/" target="_blank" rel="external">node.js官网</a>下载对应版本源码编译安装</p>
+<h2 id="安装hexo">安装hexo</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install hexo -g</div></pre></td></tr></table></figure>
+
+<h2 id="初始化博客">初始化博客</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$hexo</span> init &lt;文件夹名字&gt;</div><div class="line"><span class="variable">$cd</span> &lt;文件夹名字&gt;</div><div class="line"><span class="variable">$npm</span> install</div></pre></td></tr></table></figure>
+
+<h2 id="安装其它插件">安装其它插件</h2>
+<p>具体可看<a href="https://github.com/hexojs/hexo/wiki/Plugins" target="_blank" rel="external">hexo plugin列表</a><br>该文就是在插件hexo-admin下敲出来的(markdown语法编辑和预览实时对照)</p>
+<h2 id="注册github和gitcafe帐号">注册github和gitcafe帐号</h2>
+<p>github需要建格式为&lt;帐号名称&gt;.github.io的项目文件夹才能支持页面展示；gitcafe是通过建立gitcafe-pages分支来展示页面。<br>在本机生成一对公钥和密钥，将公钥分别放到这两个站点上。</p>
+<h2 id="定制hexo配置文件_config-yml">定制hexo配置文件_config.yml</h2>
+<p>主要是最后的deploy部分，由于同时向github和gitcafe推送，因此设置具体如下：(yml对空格很敏感，如果冒号后面有具体内容的话，冒号后面必须有且只有一个空格，不能用tab代替)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  message:</div><div class="line">  repo:</div><div class="line">    github: git@github.com:<span class="tag">&lt;<span class="title">github帐号</span>&gt;</span>/<span class="tag">&lt;<span class="title">github帐号</span>&gt;</span>.github.io.git,master</div><div class="line">    gitcafe: git@gitcafe.com:<span class="tag">&lt;<span class="title">你的gitcafe帐号</span>&gt;</span>/<span class="tag">&lt;<span class="title">gitcafe帐号</span>&gt;</span>.git,gitcafe-pages</div></pre></td></tr></table></figure>
+
+<h2 id="生成和推送blog">生成和推送blog</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$hexo</span> g</div><div class="line"><span class="variable">$hexo</span> d</div></pre></td></tr></table></figure>
+
+<h2 id="本地预览blog">本地预览blog</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$hexo</span> s</div></pre></td></tr></table></figure>
+
+<p>浏览器打开<a href="http://localhost:4000即可" target="_blank" rel="external">http://localhost:4000即可</a></p>
+<h2 id="qiniu图库设置">qiniu图库设置</h2>
+<p>暂未搞定<br>主要没搞清hexo-qiniu-sync的具体用法</p>
+<h2 id="gitcafe域名绑定">gitcafe域名绑定</h2>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a><a href="/tags/github/">github</a><a href="/tags/gitcafe/">gitcafe</a><a href="/tags/markdown/">markdown</a><a href="/tags/qiniu/">qiniu</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/web/">web</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://mujinjun.gitcafe.com/2014/10/25/hexobuildsite/" data-title="hexo建站步骤简要 | Do sth." data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/10/27/pythoncompute/" title="python科学计算相关">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  python科学计算相关</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建步骤："><span class="toc-number">1.</span> <span class="toc-text">搭建步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git"><span class="toc-number">1.1.</span> <span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">1.3.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化博客"><span class="toc-number">1.4.</span> <span class="toc-text">初始化博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装其它插件"><span class="toc-number">1.5.</span> <span class="toc-text">安装其它插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册github和gitcafe帐号"><span class="toc-number">1.6.</span> <span class="toc-text">注册github和gitcafe帐号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定制hexo配置文件_config-yml"><span class="toc-number">1.7.</span> <span class="toc-text">定制hexo配置文件_config.yml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成和推送blog"><span class="toc-number">1.8.</span> <span class="toc-text">生成和推送blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地预览blog"><span class="toc-number">1.9.</span> <span class="toc-text">本地预览blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qiniu图库设置"><span class="toc-number">1.10.</span> <span class="toc-text">qiniu图库设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gitcafe域名绑定"><span class="toc-number">1.11.</span> <span class="toc-text">gitcafe域名绑定</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/web/" title="web">web<sup>1</sup></a></li>
+		
+			<li><a href="/categories/生物信息/" title="生物信息">生物信息<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/gitcafe/" title="gitcafe">gitcafe<sup>1</sup></a></li>
+		
+			<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/qiniu/" title="qiniu">qiniu<sup>1</sup></a></li>
+		
+			<li><a href="/tags/生物信息/" title="生物信息">生物信息<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://mujinjun.gitcafe.com" target="_blank" title="mujinjun">mujinjun</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
