@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Do sth.</title>
+    <title>[转]mysql大数据测试-批量生成测试数据 | Do sth.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="mujinjun">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+    <meta name="description" content="如果你想在一个项目的研发阶段测试一个mysql表的分区和索引是否合理，但又没有生产环境中的数据进行测试怎么办呢？hisune最近遇到了这个问题，这个时候可以手动生成一些数据来测试。
+当然，你可以写个php程序用while去循环插入mysql，但这种方式效率不是很高，我们还有更好的办法，那就是mysql的存储过程。
+下面是我的一个生成测试数据的一个mysql函数，适当进行修改，可以用在任意表结构中：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://mujinjun.gitcafe.com/2015/08/04/hello-world/index.html">
+<meta property="og:title" content="[转]mysql大数据测试-批量生成测试数据">
+<meta property="og:url" content="http://mujinjun.github.io/2015/08/14/mysqldashujuceshi/index.html">
 <meta property="og:site_name" content="Do sth.">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-08-04T05:48:23.078Z">
+<meta property="og:description" content="如果你想在一个项目的研发阶段测试一个mysql表的分区和索引是否合理，但又没有生产环境中的数据进行测试怎么办呢？hisune最近遇到了这个问题，这个时候可以手动生成一些数据来测试。
+当然，你可以写个php程序用while去循环插入mysql，但这种方式效率不是很高，我们还有更好的办法，那就是mysql的存储过程。
+下面是我的一个生成测试数据的一个mysql函数，适当进行修改，可以用在任意表结构中：">
+<meta property="og:updated_time" content="2015-08-14T11:48:16.379Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="[转]mysql大数据测试-批量生成测试数据">
+<meta name="twitter:description" content="如果你想在一个项目的研发阶段测试一个mysql表的分区和索引是否合理，但又没有生产环境中的数据进行测试怎么办呢？hisune最近遇到了这个问题，这个时候可以手动生成一些数据来测试。
+当然，你可以写个php程序用while去循环插入mysql，但这种方式效率不是很高，我们还有更好的办法，那就是mysql的存储过程。
+下面是我的一个生成测试数据的一个mysql函数，适当进行修改，可以用在任意表结构中：">
 
     
     <link rel="alternative" href="/atom.xml" title="Do sth." type="application/atom+xml">
@@ -68,7 +71,7 @@ Quick">
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:mujinjun.gitcafe.com">
+						<input type="hidden" name="q" value="site:mujinjun.github.io">
 					</form>
 					
 					</li>
@@ -83,14 +86,14 @@ Quick">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/04/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/08/14/mysqldashujuceshi/" title="[转]mysql大数据测试-批量生成测试数据" itemprop="url">[转]mysql大数据测试-批量生成测试数据</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="mujinjun" target="_blank" itemprop="author">mujinjun</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-04T05:48:23.078Z" itemprop="datePublished"> 發表於 2015-08-04</time>
+    <time datetime="2015-08-14T01:14:47.000Z" itemprop="datePublished"> 發表於 2015-08-14</time>
     
   </p>
 </header>
@@ -99,24 +102,60 @@ Quick">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+			
 		
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<p>如果你想在一个项目的研发阶段测试一个mysql表的分区和索引是否合理，但又没有生产环境中的数据进行测试怎么办呢？hisune最近遇到了这个问题，这个时候可以手动生成一些数据来测试。</p>
+<p>当然，你可以写个php程序用while去循环插入mysql，但这种方式效率不是很高，我们还有更好的办法，那就是mysql的存储过程。</p>
+<p>下面是我的一个生成测试数据的一个mysql函数，适当进行修改，可以用在任意表结构中：</p>
+<pre><code>delimiter $$
+<span class="operator"><span class="keyword">create</span> <span class="keyword">procedure</span> insert_test(<span class="keyword">in</span> counter <span class="built_in">integer</span>, <span class="keyword">in</span> time_stamp <span class="built_in">integer</span>)
+  <span class="keyword">begin</span>
+    <span class="keyword">while</span> counter &gt;= <span class="number">1</span> <span class="keyword">do</span>
+      <span class="keyword">set</span> @user_id = (select user_id <span class="keyword">from</span> <span class="keyword">main</span>.<span class="keyword">users</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">rand</span>() <span class="keyword">limit</span> <span class="number">1</span>);</span>
+      <span class="operator"><span class="keyword">set</span> @is_first = (select <span class="keyword">if</span>((<span class="keyword">count</span>(*)) &gt; <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>) <span class="keyword">as</span> <span class="keyword">count</span> <span class="keyword">from</span> stream_test <span class="keyword">where</span> <span class="string">`user_id`</span> = @user_id);</span>
+      <span class="operator"><span class="keyword">set</span> @make_time = <span class="keyword">FLOOR</span>(time_stamp + <span class="keyword">RAND</span>() * <span class="number">86395</span>);</span>
+      <span class="operator"><span class="keyword">set</span> @money = <span class="keyword">FLOOR</span>(<span class="number">1</span> + (<span class="keyword">RAND</span>() * <span class="number">2000</span>));</span>
+      <span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> stream_order <span class="keyword">values</span>(
+        @user_id,
+        @is_first,
+        <span class="keyword">concat</span>(<span class="string">'test_'</span>, <span class="keyword">UNIX_TIMESTAMP</span>(), counter),
+        @make_time,
+        @make_time + <span class="number">2</span>
+      );</span>
+      <span class="operator"><span class="keyword">set</span> counter = counter - <span class="number">1</span>;</span>
+    <span class="operator"><span class="keyword">end</span> <span class="keyword">while</span>;</span>
+  <span class="operator"><span class="keyword">end</span>
+$$
+delimiter ;</span>
+</code></pre><p>这里是创建了一个insert_test的函数，它有两个int型的参数counter和time_stamp。counter用来计数，表示需要插入多少条数据；time_stamp用来指定插入的时间设置为哪一天。</p>
+<p>mysql中，可以用set @user_id = 的方式来赋值，以便后面使用。可以直接赋值固定值，也可以赋值为sql语句的结果集。</p>
+<p>这里还有两个常用函数：</p>
+<p><strong>FLOOR：</strong></p>
+<p>若要在i ≤ R ≤ j 这个范围得到一个随机整数，需要用到表达式 FLOOR(i + RAND() * (j – i + 1))。例如， 若要在6 到 18 的范围内得到一个随机整数, 可使用以下语句：</p>
+<pre><code>FLOOR(<span class="number">6</span> + RAND() * <span class="number">13</span>);
+</code></pre><p><strong>concat</strong>：组装字符串，不仅仅支持两个参数，多个参数也支持哦。<br>那么使用该函数的方法就简单了：</p>
+<pre><code><span class="comment">-- insert_test</span>
+<span class="comment">-- 在指定日期当天随机生成86400条测试数据(时间也具有随机性)</span>
+<span class="operator"><span class="keyword">call</span> insert_test(<span class="number">86400</span>, <span class="keyword">UNIX_TIMESTAMP</span>(<span class="string">'2014-08-07'</span>));</span>
+</code></pre><p>由于插入函数中涉及到rand()查询，实际上生成速度会比较慢。这仅是一个举例而已，批量插入数据时应该尽量减少里面的select查询，尽量把插入测试数据的值固定为一些范围。</p>
+<p>转自：<a href="https://hisune.com/view/15/mysql-mass-data-processing" target="_blank" rel="external">https://hisune.com/view/15/mysql-mass-data-processing</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/web/">web</a>►<a class="article-category-link" href="/categories/web/database/">database</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/mysql/">mysql</a><a href="/tags/测试数据/">测试数据</a>
+  </div>
 
 </div>
 
@@ -124,7 +163,7 @@ Quick">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mujinjun.gitcafe.com/2015/08/04/hello-world/" data-title="Hello World | Do sth." data-tsina="null" class="share clearfix">
+	  <div data-url="http://mujinjun.github.io/2015/08/14/mysqldashujuceshi/" data-title="[转]mysql大数据测试-批量生成测试数据 | Do sth." data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -156,7 +195,7 @@ Quick">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ 
  
   </div>
 
@@ -170,7 +209,11 @@ Quick">
 		<ul>
 		
 		  
-			<li><a href="/categories/web/" title="web">web<sup>1</sup></a></li>
+			<li><a href="/categories/web/database/" title="database">database<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/web/" title="web">web<sup>2</sup></a></li>
 		  
 		
 		  
@@ -185,10 +228,6 @@ Quick">
 <div class="tagslist">
 	<p class="asidetitle">標簽</p>
 		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/生物信息/" title="生物信息">生物信息<sup>1</sup></a></li>
-			
 		
 			
 				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -208,6 +247,18 @@ Quick">
 		
 			
 				<li><a href="/tags/qiniu/" title="qiniu">qiniu<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/生物信息/" title="生物信息">生物信息<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/测试数据/" title="测试数据">测试数据<sup>1</sup></a></li>
 			
 		
 		</ul>
